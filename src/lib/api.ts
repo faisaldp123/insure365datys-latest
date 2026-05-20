@@ -4,6 +4,7 @@ export interface ContactPayload {
   name: string;
   mobile: string;
   email?: string;
+  insuranceType: string;
   message?: string;
 }
 
