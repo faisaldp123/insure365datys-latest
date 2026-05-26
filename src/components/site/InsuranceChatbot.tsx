@@ -8,7 +8,7 @@ export default function InsuranceChatbot() {
   const [insuranceType, setInsuranceType] = useState("");
   const [requirement, setRequirement] = useState("");
 
-  const whatsappNumber = "919999999999"; // Replace with your WhatsApp Number
+  const whatsappNumber = "9870220211"; // Replace with your WhatsApp Number
 
   const sendToWhatsApp = () => {
     const message = `
