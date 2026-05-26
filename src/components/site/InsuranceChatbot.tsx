@@ -31,7 +31,7 @@ Please contact me with more details.
     <>
       {/* Floating Chat Widget */}
       {!open && (
-        <div className="fixed bottom-28 right-6 z-[9999] flex flex-col items-end">
+        <div className="fixed bottom-24 sm:bottom-28 right-4 sm:right-6 z-[9999] flex flex-col items-end">
           {/* Text Bubble */}
           <div className="bg-white shadow-xl border rounded-xl px-4 py-2 mb-3 text-sm font-medium text-gray-700">
             Need Help?
@@ -54,22 +54,25 @@ Please contact me with more details.
       {/* Chat Modal */}
       {open && (
         <div
-          className="
-            fixed
-            bottom-6
-            right-6
-            z-[9999]
-            w-[380px]
-            max-w-[95vw]
-            bg-white
-            rounded-2xl
-            shadow-2xl
-            border
-            overflow-hidden
-            transition-all
-            duration-300
-          "
-        >
+  className="
+    fixed
+    bottom-20
+    sm:bottom-6
+    right-2
+    sm:right-6
+    z-[9999]
+    w-[calc(100vw-16px)]
+    sm:w-[380px]
+    max-w-[380px]
+    bg-white
+    rounded-2xl
+    shadow-2xl
+    border
+    overflow-hidden
+    transition-all
+    duration-300
+  "
+>
           {/* Header */}
           <div className="bg-blue-600 text-white p-4 flex items-center justify-between">
             <div>
