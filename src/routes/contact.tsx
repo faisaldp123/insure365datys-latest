@@ -290,7 +290,7 @@ function Contact() {
                 <span>
                   A7, Moti Nagar
                   <br />
-                  New Delhi 110094
+                  New Delhi 110015
                 </span>
               </li>
 
@@ -303,13 +303,13 @@ function Contact() {
               <li className="flex gap-3">
                 <Mail className="h-5 w-5 shrink-0 text-primary" />
 
-                <span>hello@insure365days.com</span>
+                <span>info@insure365days.com</span>
               </li>
 
               <li className="flex gap-3">
                 <Clock className="h-5 w-5 shrink-0 text-primary" />
 
-                <span>Mon–Sun, 8 AM – 8 PM</span>
+                <span>Mon–Sat, 9 AM – 7 PM</span>
               </li>
             </ul>
           </Card>
