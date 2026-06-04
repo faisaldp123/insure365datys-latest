@@ -28,28 +28,92 @@ function NotFoundComponent() {
 
 export const Route = createRootRoute({
   head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Insure365days" },
-      { name: "description", content: "Insure365days — trusted insurance solutions, every day of the year." },
-      { name: "author", content: "Insure365days" },
-      { property: "og:title", content: "Insure365days" },
-      { property: "og:description", content: "Trusted insurance solutions, every day of the year." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-      {
-        rel: "icon",
-        href: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230ea5e9'/%3E%3Ctext x='50' y='66' font-size='56' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3EI%3C/text%3E%3C/svg%3E",
-      },
-    ],
-  }),
+  title:
+    "Insure365days | Health, Life, Motor & General Insurance in India",
+
+  meta: [
+    { charSet: "utf-8" },
+    { name: "viewport", content: "width=device-width, initial-scale=1" },
+
+    {
+      name: "description",
+      content:
+        "Get the best Health Insurance, Life Insurance, Motor Insurance and General Insurance plans in India. Compare policies and get expert guidance from Insure365days.",
+    },
+
+    {
+      name: "keywords",
+      content:
+        "health insurance, life insurance, motor insurance, car insurance, bike insurance, general insurance, insurance advisor, insurance agency india, insure365days",
+    },
+
+    {
+      name: "author",
+      content: "Insure365days",
+    },
+
+    {
+      property: "og:title",
+      content:
+        "Insure365days | Health, Life, Motor & General Insurance in India",
+    },
+
+    {
+      property: "og:description",
+      content:
+        "Compare Health, Life, Motor and General Insurance plans with expert guidance from Insure365days.",
+    },
+
+    {
+      property: "og:type",
+      content: "website",
+    },
+
+    {
+      property: "og:url",
+      content: "https://insure365days.com",
+    },
+
+    {
+      property: "og:site_name",
+      content: "Insure365days",
+    },
+
+    {
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+
+    {
+      name: "twitter:title",
+      content:
+        "Insure365days | Health, Life, Motor & General Insurance",
+    },
+
+    {
+      name: "twitter:description",
+      content:
+        "Trusted insurance solutions for Health, Life, Motor and General Insurance.",
+    },
+  ],
+
+  links: [
+    {
+      rel: "stylesheet",
+      href: appCss,
+    },
+
+    {
+      rel: "canonical",
+      href: "https://insure365days.com",
+    },
+
+    {
+      rel: "icon",
+      href: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230ea5e9'/%3E%3Ctext x='50' y='66' font-size='56' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3EI%3C/text%3E%3C/svg%3E",
+    },
+  ],
+}),
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
@@ -59,8 +123,28 @@ function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <HeadContent />
-      </head>
+  <HeadContent />
+
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "InsuranceAgency",
+        name: "Insure365days",
+        url: "https://insure365days.com",
+        description:
+          "Health, Life, Motor and General Insurance solutions across India.",
+        areaServed: "India",
+        sameAs: [
+          "https://www.facebook.com/YOUR_FACEBOOK_PAGE",
+          "https://www.instagram.com/YOUR_INSTAGRAM_PAGE",
+          "https://www.linkedin.com/company/YOUR_LINKEDIN_PAGE",
+        ],
+      }),
+    }}
+  />
+</head>
       <body>
         {children}
         <Scripts />
