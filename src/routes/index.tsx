@@ -62,9 +62,9 @@ function Index() {
               <Shield className="h-3.5 w-3.5" /> Trusted insurance, every day
             </span>
             <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight md:text-6xl">
-              Protect What Matters{" "}
+              Protect What Matters Every Day{" "}
               <span className="bg-gradient-to-r from-primary to-[var(--primary-glow)] bg-clip-text text-transparent">
-                Every Day
+                Health, Life, Motor & General Insurance in India
               </span>
             </h1>
             <p className="mt-5 mx-auto max-w-xl text-lg text-muted-foreground">
