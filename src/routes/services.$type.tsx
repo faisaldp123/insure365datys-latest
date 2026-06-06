@@ -16,6 +16,8 @@ const data = {
     title: "General Insurance",
     tagline: "Comprehensive cover for life's everyday risks.",
 
+    infoImage: "/services/general-new.png",
+
     desc:
       "Protect your home, belongings and travel plans with flexible general insurance built around how you actually live.",
 
@@ -55,6 +57,8 @@ const data = {
     icon: Car,
     title: "Motor Insurance",
     tagline: "Drive worry-free, every day of the year.",
+
+    infoImage: "/services/motor-new.png",
 
     desc:
       "Comprehensive and third-party plans for cars, bikes and commercial vehicles with nationwide cashless garage support.",
@@ -96,6 +100,8 @@ const data = {
     title: "Health Insurance",
     tagline: "Care for you and the people you love.",
 
+    infoImage: "/services/health-new.png",
+
     desc:
       "Cashless hospitalization, family floater plans and critical illness cover with extensive hospital network support.",
 
@@ -135,6 +141,8 @@ const data = {
     icon: Users,
     title: "Life Insurance",
     tagline: "Plan today for the people who matter tomorrow.",
+
+    infoImage: "/services/life-new.png",
 
     desc:
       "Term, savings and ULIP plans designed to secure your family's future and grow long-term wealth.",
@@ -366,20 +374,29 @@ function ServicePage() {
       </section>
 
       {/* OVERVIEW */}
-      <section className="bg-muted/30 py-20">
-        <div className="container mx-auto max-w-5xl px-4">
-          <h2 className="text-3xl font-bold">
-            About This Insurance
-          </h2>
+<section className="bg-muted/30 py-20">
+  <div className="container mx-auto max-w-6xl px-4">
+    <h2 className="text-center text-3xl font-bold">
+      About This Insurance
+    </h2>
 
-          <p className="mt-8 leading-8 text-muted-foreground">
-            {s.overview}
-          </p>
-        </div>
-      </section>
+    <p className="mx-auto mt-6 max-w-4xl text-center leading-8 text-muted-foreground">
+      {s.overview}
+    </p>
+
+    <div className="mt-12 overflow-hidden rounded-3xl shadow-xl">
+      <img
+  src={s.infoImage}
+  alt={`${s.title} Information`}
+  className="w-full rounded-3xl object-cover"
+  loading="lazy"
+/>
+    </div>
+  </div>
+</section>
 
       {/* COVERAGE */}
-      <section className="container mx-auto max-w-6xl px-4 py-20">
+      <section className="container mx-auto max-w-6xl px-4 py-4">
         <div className="text-center">
           <h2 className="text-3xl font-bold">
             Coverage Includes
