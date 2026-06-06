@@ -80,6 +80,16 @@ export const Route = createRootRoute({
     },
 
     {
+  property: "og:image",
+  content: "https://insure365days.com/favicon.png",
+},
+
+{
+  name: "twitter:image",
+  content: "https://insure365days.com/favicon.png",
+},
+
+    {
       name: "twitter:card",
       content: "summary_large_image",
     },
@@ -109,9 +119,10 @@ export const Route = createRootRoute({
     },
 
     {
-      rel: "icon",
-      href: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230ea5e9'/%3E%3Ctext x='50' y='66' font-size='56' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3EI%3C/text%3E%3C/svg%3E",
-    },
+  rel: "icon",
+  type: "image/png",
+  href: "/favicon.png",
+}
   ],
 }),
   shellComponent: RootShell,
@@ -126,21 +137,45 @@ function RootShell({ children }: { children: React.ReactNode }) {
   <HeadContent />
 
   <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "InsuranceAgency",
+      name: "Insure365days",
+      url: "https://insure365days.com",
+
+      logo: "https://insure365days.com/favicon.png",
+      image: "https://insure365days.com/favicon.png",
+
+      telephone: "+919870220211",
+      email: "info@insure365days.com",
+
+      description:
+        "Health, Life, Motor and General Insurance solutions across India.",
+
+      areaServed: "India",
+
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "A7 Moti Nagar",
+        addressLocality: "New Delhi",
+        postalCode: "110015",
+        addressCountry: "IN",
+      },
+    }),
+  }}
+/>
+
+{/* Website Schema */}
+  <script
     type="application/ld+json"
     dangerouslySetInnerHTML={{
       __html: JSON.stringify({
         "@context": "https://schema.org",
-        "@type": "InsuranceAgency",
+        "@type": "WebSite",
         name: "Insure365days",
         url: "https://insure365days.com",
-        description:
-          "Health, Life, Motor and General Insurance solutions across India.",
-        areaServed: "India",
-        sameAs: [
-          "https://www.facebook.com/YOUR_FACEBOOK_PAGE",
-          "https://www.instagram.com/YOUR_INSTAGRAM_PAGE",
-          "https://www.linkedin.com/company/YOUR_LINKEDIN_PAGE",
-        ],
       }),
     }}
   />

@@ -6,13 +6,70 @@ import { Target, Eye, Award, Heart, Users, Clock } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
-    meta: [
-      { title: "About Us — Insure365days" },
-      { name: "description", content: "Learn about Insure365days, our mission to protect families and our commitment to year-round service." },
-      { property: "og:title", content: "About Insure365days" },
-      { property: "og:description", content: "Our mission, vision and why thousands trust us." },
-    ],
-  }),
+  title: "About Us | Insure365days",
+
+  meta: [
+    {
+      name: "description",
+      content:
+        "Learn about Insure365days, India's trusted insurance advisor for Health, Life, Motor and General Insurance.",
+    },
+
+    {
+      property: "og:title",
+      content: "About Us | Insure365days",
+    },
+
+    {
+      property: "og:description",
+      content:
+        "Learn about Insure365days, our mission, vision and commitment to protecting families.",
+    },
+
+    {
+      property: "og:type",
+      content: "website",
+    },
+
+    {
+      property: "og:image",
+      content: "https://insure365days.com/logo.png",
+    },
+
+    {
+      property: "og:url",
+      content: "https://insure365days.com/about",
+    },
+
+    {
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+
+    {
+      name: "twitter:title",
+      content: "About Us | Insure365days",
+    },
+
+    {
+      name: "twitter:description",
+      content:
+        "Learn about India's trusted insurance advisor.",
+    },
+
+    {
+      name: "twitter:image",
+      content: "https://insure365days.com/logo.png",
+    },
+  ],
+
+  links: [
+    {
+      rel: "canonical",
+      href: "https://insure365days.com/about",
+    },
+  ],
+}),
   component: About,
 });
 
@@ -83,6 +140,20 @@ function About() {
           </div>
         </div>
       </section>
+
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      name: "About Insure365days",
+      url: "https://insure365days.com/about",
+      description:
+        "About Insure365days insurance advisors.",
+    }),
+  }}
+/>
     </SiteLayout>
   );
 }
