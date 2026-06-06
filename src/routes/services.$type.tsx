@@ -181,27 +181,78 @@ export const Route = createFileRoute("/services/$type")({
     return data[params.type as ServiceType];
   },
 
-  head: ({ loaderData }) => ({
-    meta: loaderData
-      ? [
-          {
-            title: `${loaderData.title} — Insure365days`,
-          },
-          {
-            name: "description",
-            content: loaderData.desc,
-          },
-          {
-            property: "og:title",
-            content: `${loaderData.title} — Insure365days`,
-          },
-          {
-            property: "og:description",
-            content: loaderData.tagline,
-          },
-        ]
-      : [],
-  }),
+  head: ({ loaderData, params }) => ({
+  title: loaderData
+    ? `${loaderData.title} | Insure365days`
+    : "Insurance Services | Insure365days",
+
+  meta: loaderData
+    ? [
+        {
+          name: "description",
+          content: loaderData.desc,
+        },
+
+        {
+          name: "keywords",
+          content:
+            `${loaderData.title}, Insurance, Health Insurance, Life Insurance, Motor Insurance, General Insurance, Insurance Advisor India`,
+        },
+
+        {
+          property: "og:title",
+          content: `${loaderData.title} | Insure365days`,
+        },
+
+        {
+          property: "og:description",
+          content: loaderData.tagline,
+        },
+
+        {
+          property: "og:type",
+          content: "website",
+        },
+
+        {
+          property: "og:image",
+          content: loaderData.image,
+        },
+
+        {
+          property: "og:url",
+          content: `https://insure365days.com/services/${params.type}`,
+        },
+
+        {
+          name: "twitter:card",
+          content: "summary_large_image",
+        },
+
+        {
+          name: "twitter:title",
+          content: `${loaderData.title} | Insure365days`,
+        },
+
+        {
+          name: "twitter:description",
+          content: loaderData.desc,
+        },
+
+        {
+          name: "twitter:image",
+          content: loaderData.image,
+        },
+      ]
+    : [],
+
+  links: [
+    {
+      rel: "canonical",
+      href: `https://insure365days.com/services/${params.type}`,
+    },
+  ],
+}),
 
   notFoundComponent: () => (
     <SiteLayout>
@@ -426,6 +477,99 @@ function ServicePage() {
           </Card>
         </div>
       </section>
+
+      <>
+  {/* SERVICE SCHEMA */}
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: s.title,
+        serviceType: s.title,
+        provider: {
+          "@type": "InsuranceAgency",
+          name: "Insure365days",
+          url: "https://insure365days.com",
+          telephone: "+919870220211",
+        },
+        areaServed: "India",
+        description: s.desc,
+      }),
+    }}
+  />
+
+  {/* FAQ SCHEMA */}
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: `What is ${s.title}?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: s.overview,
+            },
+          },
+          {
+            "@type": "Question",
+            name: `What does ${s.title} cover?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: s.coverage.join(", "),
+            },
+          },
+          {
+            "@type": "Question",
+            name: `Why choose Insure365days for ${s.title}?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: s.whyChoose.join(", "),
+            },
+          },
+        ],
+      }),
+    }}
+  />
+
+  {/* BREADCRUMB SCHEMA */}
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://insure365days.com",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: "https://insure365days.com/services",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: s.title,
+            item: `https://insure365days.com/services/${s.title
+              .toLowerCase()
+              .replace(" insurance", "")}`,
+          },
+        ],
+      }),
+    }}
+  />
+</>
     </SiteLayout>
   );
 }

@@ -13,20 +13,59 @@ import { postContact } from "@/lib/api";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
-    meta: [
-      { title: "Contact Us — Insure365days" },
-      {
-        name: "description",
-        content:
-          "Get in touch with Insure365days. Visit our office, call, email, or send a message.",
-      },
-      { property: "og:title", content: "Contact Insure365days" },
-      {
-        property: "og:description",
-        content: "Reach our team for quotes, claims and support.",
-      },
-    ],
-  }),
+  title: "Contact Us | Insure365days",
+
+  meta: [
+    {
+      name: "description",
+      content:
+        "Contact Insure365days for Health Insurance, Life Insurance, Motor Insurance and General Insurance solutions.",
+    },
+
+    {
+      property: "og:title",
+      content: "Contact Us | Insure365days",
+    },
+
+    {
+      property: "og:description",
+      content:
+        "Get insurance quotes and expert support from Insure365days.",
+    },
+
+    {
+      property: "og:image",
+      content: "https://insure365days.com/logo.png",
+    },
+
+    {
+      property: "og:url",
+      content: "https://insure365days.com/contact",
+    },
+
+    {
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+
+    {
+      name: "twitter:title",
+      content: "Contact Us | Insure365days",
+    },
+
+    {
+      name: "twitter:image",
+      content: "https://insure365days.com/logo.png",
+    },
+  ],
+
+  links: [
+    {
+      rel: "canonical",
+      href: "https://insure365days.com/contact",
+    },
+  ],
+}),
   component: Contact,
 });
 
@@ -297,7 +336,7 @@ function Contact() {
               <li className="flex gap-3">
                 <Phone className="h-5 w-5 shrink-0 text-primary" />
 
-                <span>+1 (800) 365-0000</span>
+                <span>+91 9870220211</span>
               </li>
 
               <li className="flex gap-3">
@@ -327,6 +366,28 @@ function Contact() {
           </Card>
         </div>
       </section>
+
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "InsuranceAgency",
+      name: "Insure365days",
+      url: "https://insure365days.com",
+      telephone: "+919870220211",
+      email: "info@insure365days.com",
+      image: "https://insure365days.com/logo.png",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "A7 Moti Nagar",
+        addressLocality: "New Delhi",
+        postalCode: "110015",
+        addressCountry: "IN",
+      },
+    }),
+  }}
+/>
     </SiteLayout>
   );
 }
