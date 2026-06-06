@@ -81,7 +81,7 @@ export const Route = createRootRoute({
 
     {
   property: "og:image",
-  content: "https://insure365days.com/favicon.png",
+  content: "https://insure365days.com/fevicon.png",
 },
 
 {
