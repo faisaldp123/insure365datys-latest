@@ -16,7 +16,7 @@ import {
 export function Footer() {
   return (
     <footer className="border-t border-border bg-secondary/40">
-      <div className="container mx-auto grid gap-10 px-4 py-14 md:grid-cols-4">
+      <div className="container mx-auto grid gap-7 px-4 py-10 md:grid-cols-4">
 
         <div>
           <Link to="/" className="flex items-center gap-2 font-bold text-lg">

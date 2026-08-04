@@ -12,382 +12,111 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { postContact } from "@/lib/api";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-  title: "Contact Us | Insure365days",
-
-  meta: [
-    {
-      name: "description",
-      content:
-        "Contact Insure365days for Health Insurance, Life Insurance, Motor Insurance and General Insurance solutions.",
-    },
-
-    {
-      property: "og:title",
-      content: "Contact Us | Insure365days",
-    },
-
-    {
-      property: "og:description",
-      content:
-        "Get insurance quotes and expert support from Insure365days.",
-    },
-
-    {
-      property: "og:image",
-      content: "https://insure365days.com/logo.png",
-    },
-
-    {
-      property: "og:url",
-      content: "https://insure365days.com/contact",
-    },
-
-    {
-      name: "twitter:card",
-      content: "summary_large_image",
-    },
-
-    {
-      name: "twitter:title",
-      content: "Contact Us | Insure365days",
-    },
-
-    {
-      name: "twitter:image",
-      content: "https://insure365days.com/logo.png",
-    },
-  ],
-
-  links: [
-    {
-      rel: "canonical",
-      href: "https://insure365days.com/contact",
-    },
-  ],
-}),
+  head: () => ({ title: "Contact Us | Insure365days" }),
   component: Contact,
 });
 
+const insuranceTypes = ["Health Insurance", "Life Insurance", "Car Insurance"];
+const brands = ["Star Union", "Bharti AXA", "Pramerica Life", "Shri Ram", "Go Digit", "Ageas Federal", "Central General", "HDFC Life", "IndusInd Nippon", "ICICI Life"];
+
 const schema = z.object({
   name: z.string().trim().min(2, "Enter your name").max(80),
-
+  dob: z.string().min(1, "Select your date of birth"),
+  mobile: z.string().trim().regex(/^\+?[0-9][0-9\s-]{7,18}$/, "Enter a valid mobile number"),
+  alternativeMobile: z.string().trim().optional(),
+  insuranceType: z.string().min(1, "Select insurance type"),
+  brandType: z.string().min(1, "Select brand type"),
+  termAndPpt: z.string().trim().min(1, "Enter term and PPT").max(80),
+  applicationNumber: z.string().trim().min(1, "Enter application number").max(80),
   email: z.string().trim().email("Enter a valid email").max(120),
-
-  phone: z.string().trim().min(7, "Enter a valid phone").max(20),
-
-  insuranceType: z
-    .string()
-    .trim()
-    .min(1, "Select insurance type"),
-
-  message: z
-    .string()
-    .trim()
-    .min(10, "Message must be at least 10 characters")
-    .max(1000),
+  nomineeName: z.string().trim().min(2, "Enter nominee name").max(80),
+  nomineeDob: z.string().min(1, "Select nominee date of birth"),
+  shortAddress: z.string().trim().min(5, "Enter a short address").max(300),
 });
 
-function Contact() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    insuranceType: "",
-    message: "",
-  });
+const initialForm = { name: "", dob: "", mobile: "", alternativeMobile: "", insuranceType: "", brandType: "", termAndPpt: "", applicationNumber: "", email: "", nomineeName: "", nomineeDob: "", shortAddress: "" };
 
+function Contact() {
+  const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const update = (field: keyof typeof initialForm, value: string) => setForm((current) => ({ ...current, [field]: value }));
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-
     const result = schema.safeParse(form);
-
     if (!result.success) {
-      const fe: Record<string, string> = {};
-
-      result.error.issues.forEach((i) => {
-        if (i.path[0]) fe[i.path[0] as string] = i.message;
-      });
-
-      setErrors(fe);
+      setErrors(Object.fromEntries(result.error.issues.map((issue) => [issue.path[0], issue.message])));
       return;
     }
-
     try {
-      await postContact({
-        name: form.name,
-        email: form.email,
-        mobile: form.phone,
-        insuranceType: form.insuranceType,
-        message: form.message,
-      });
-
+      await postContact(form);
       setErrors({});
-
-      toast.success("Message sent! We'll get back to you shortly.");
-
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        insuranceType: "",
-        message: "",
-      });
+      setForm(initialForm);
+      toast.success("Your details have been submitted successfully.");
     } catch {
-      toast.error("Failed to send message");
+      toast.error("We couldn't submit your details. Please try again.");
     }
   }
 
+  const field = (id: keyof typeof initialForm, label: string, type = "text", placeholder?: string) => (
+    <div className="space-y-1.5">
+      <Label htmlFor={id}>{label}</Label>
+      <Input id={id} type={type} value={form[id]} placeholder={placeholder} onChange={(e) => update(id, e.target.value)} />
+      {errors[id] && <p className="text-xs text-destructive">{errors[id]}</p>}
+    </div>
+  );
+
   return (
     <SiteLayout>
-      {/* HERO */}
-      <section className="bg-[var(--gradient-soft)] pt-12 pb-8 md:pt-16 md:pb-10">
-        <div className="container mx-auto max-w-3xl px-4 text-center">
-          <h1 className="text-4xl font-bold md:text-5xl">
-            Let's talk
-          </h1>
-
-          <p className="mt-4 text-lg text-muted-foreground">
-            Questions, quotes or claims — our team is ready
-            to help, 365 days a year.
-          </p>
+      <section className="bg-[var(--gradient-soft)] py-10 md:py-12">
+        <div className="container mx-auto max-w-3xl text-center">
+          <h1 className="text-4xl font-bold md:text-5xl">Insurance application details</h1>
+          <p className="mt-3 text-base text-muted-foreground md:text-lg">Share your details securely and our insurance advisor will get in touch.</p>
         </div>
       </section>
-
-      {/* CONTENT */}
-      <section className="container mx-auto grid gap-8 px-4 pt-8 pb-16 lg:grid-cols-3">
-        
-        {/* LEFT FORM */}
-        <Card className="p-6 lg:col-span-2">
-          <h2 className="text-2xl font-bold">
-            Send us a message
-          </h2>
-
-          <form
-            onSubmit={submit}
-            className="mt-6 grid gap-4 sm:grid-cols-2"
-          >
-            {/* NAME */}
+      <section className="container mx-auto grid gap-6 py-8 lg:grid-cols-3">
+        <Card className="border-border/80 p-5 shadow-[var(--shadow-card)] sm:p-6 lg:col-span-2">
+          <div className="border-b pb-4">
+            <h2 className="text-2xl font-bold">Application form</h2>
+            <p className="mt-1 text-sm text-muted-foreground">The date is recorded automatically when you submit this form.</p>
+          </div>
+          <form onSubmit={submit} className="mt-5 grid gap-x-4 gap-y-4 sm:grid-cols-2">
+            {field("name", "Full name", "text", "Enter full name")}
+            {field("dob", "Date of birth", "date")}
+            {field("mobile", "Mobile number", "tel", "Enter mobile number")}
+            {field("alternativeMobile", "Alternative mobile number", "tel", "Optional")}
             <div className="space-y-1.5">
-              <Label htmlFor="name">Name</Label>
-
-              <Input
-                id="name"
-                value={form.name}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    name: e.target.value,
-                  })
-                }
-              />
-
-              {errors.name && (
-                <p className="text-xs text-destructive">
-                  {errors.name}
-                </p>
-              )}
-            </div>
-
-            {/* EMAIL */}
-            <div className="space-y-1.5">
-              <Label htmlFor="email">Email</Label>
-
-              <Input
-                id="email"
-                type="email"
-                value={form.email}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    email: e.target.value,
-                  })
-                }
-              />
-
-              {errors.email && (
-                <p className="text-xs text-destructive">
-                  {errors.email}
-                </p>
-              )}
-            </div>
-
-            {/* PHONE */}
-            <div className="space-y-1.5">
-              <Label htmlFor="phone">Phone</Label>
-
-              <Input
-                id="phone"
-                value={form.phone}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    phone: e.target.value,
-                  })
-                }
-              />
-
-              {errors.phone && (
-                <p className="text-xs text-destructive">
-                  {errors.phone}
-                </p>
-              )}
-            </div>
-
-            {/* INSURANCE TYPE */}
-            <div className="space-y-1.5">
-              <Label htmlFor="insuranceType">
-                Insurance Type
-              </Label>
-
-              <select
-                id="insuranceType"
-                value={form.insuranceType}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    insuranceType: e.target.value,
-                  })
-                }
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-              >
-                <option value="">
-                  Select Insurance Type
-                </option>
-
-                <option value="Life Insurance">
-                  Life Insurance
-                </option>
-
-                <option value="Health Insurance">
-                  Health Insurance
-                </option>
-
-                <option value="General Insurance">
-                  General Insurance
-                </option>
-
-                <option value="Motor Insurance">
-                  Motor Insurance
-                </option>
+              <Label htmlFor="insuranceType">Type of insurance</Label>
+              <select id="insuranceType" value={form.insuranceType} onChange={(e) => update("insuranceType", e.target.value)} className="flex h-10 w-full rounded-md border border-input bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                <option value="">Select insurance type</option>{insuranceTypes.map((type) => <option key={type} value={type}>{type}</option>)}
               </select>
-
-              {errors.insuranceType && (
-                <p className="text-xs text-destructive">
-                  {errors.insuranceType}
-                </p>
-              )}
+              {errors.insuranceType && <p className="text-xs text-destructive">{errors.insuranceType}</p>}
             </div>
-
-            {/* MESSAGE */}
+            <div className="space-y-1.5">
+              <Label htmlFor="brandType">Brand type</Label>
+              <select id="brandType" value={form.brandType} onChange={(e) => update("brandType", e.target.value)} className="flex h-10 w-full rounded-md border border-input bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                <option value="">Select brand</option>{brands.map((brand) => <option key={brand} value={brand}>{brand}</option>)}
+              </select>
+              {errors.brandType && <p className="text-xs text-destructive">{errors.brandType}</p>}
+            </div>
+            {field("termAndPpt", "Term & PPT", "text", "e.g. 20 years / 10 years")}
+            {field("applicationNumber", "Application number", "text", "Enter application number")}
+            {field("email", "Email address", "email", "name@example.com")}
+            {field("nomineeName", "Nominee name", "text", "Enter nominee name")}
+            {field("nomineeDob", "Nominee date of birth", "date")}
             <div className="space-y-1.5 sm:col-span-2">
-              <Label htmlFor="message">Message</Label>
-
-              <Textarea
-                id="message"
-                rows={5}
-                value={form.message}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    message: e.target.value,
-                  })
-                }
-              />
-
-              {errors.message && (
-                <p className="text-xs text-destructive">
-                  {errors.message}
-                </p>
-              )}
+              <Label htmlFor="shortAddress">Short address</Label>
+              <Textarea id="shortAddress" rows={3} value={form.shortAddress} placeholder="House / street, city, state" onChange={(e) => update("shortAddress", e.target.value)} />
+              {errors.shortAddress && <p className="text-xs text-destructive">{errors.shortAddress}</p>}
             </div>
-
-            {/* BUTTON */}
-            <div className="sm:col-span-2">
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full bg-gradient-to-r from-primary to-[var(--primary-glow)] sm:w-auto"
-              >
-                Send Message
-              </Button>
-            </div>
+            <div className="pt-1 sm:col-span-2"><Button type="submit" size="lg" className="w-full sm:w-auto">Submit application details</Button></div>
           </form>
         </Card>
-
-        {/* RIGHT SIDE */}
         <div className="space-y-4">
-          <Card className="p-6">
-            <h3 className="font-semibold">Office</h3>
-
-            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-              <li className="flex gap-3">
-                <MapPin className="h-5 w-5 shrink-0 text-primary" />
-
-                <span>
-                  A7, Moti Nagar
-                  <br />
-                  New Delhi 110015
-                </span>
-              </li>
-
-              <li className="flex gap-3">
-                <Phone className="h-5 w-5 shrink-0 text-primary" />
-
-                <span>+91 9870220211</span>
-              </li>
-
-              <li className="flex gap-3">
-                <Mail className="h-5 w-5 shrink-0 text-primary" />
-
-                <span>info@insure365days.com</span>
-              </li>
-
-              <li className="flex gap-3">
-                <Clock className="h-5 w-5 shrink-0 text-primary" />
-
-                <span>Mon–Sat, 9 AM – 7 PM</span>
-              </li>
-            </ul>
-          </Card>
-
-          {/* MAP */}
-          <Card className="overflow-hidden p-0">
-            <div className="aspect-video w-full bg-secondary">
-              <iframe
-                title="Office location"
-                src="https://www.google.com/maps?q=A7%20Moti%20Nagar%20New%20Delhi%20110094&output=embed"
-                className="h-full w-full border-0"
-                loading="lazy"
-              />
-            </div>
-          </Card>
+          <Card className="p-5 sm:p-6"><h3 className="font-semibold">Need help?</h3><ul className="mt-4 space-y-3 text-sm text-muted-foreground"><li className="flex gap-3"><MapPin className="h-5 w-5 shrink-0 text-primary" /><span>A7, Moti Nagar<br />New Delhi 110015</span></li><li className="flex gap-3"><Phone className="h-5 w-5 shrink-0 text-primary" /><span>+91 9870220211</span></li><li className="flex gap-3"><Mail className="h-5 w-5 shrink-0 text-primary" /><span>info@insure365days.com</span></li><li className="flex gap-3"><Clock className="h-5 w-5 shrink-0 text-primary" /><span>Mon–Sat, 9 AM–7 PM</span></li></ul></Card>
+          <Card className="overflow-hidden p-0"><div className="aspect-video bg-secondary"><iframe title="Office location" src="https://www.google.com/maps?q=A7%20Moti%20Nagar%20New%20Delhi%20110094&output=embed" className="h-full w-full border-0" loading="lazy" /></div></Card>
         </div>
       </section>
-
-      <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "InsuranceAgency",
-      name: "Insure365days",
-      url: "https://insure365days.com",
-      telephone: "+919870220211",
-      email: "info@insure365days.com",
-      image: "https://insure365days.com/logo.png",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "A7 Moti Nagar",
-        addressLocality: "New Delhi",
-        postalCode: "110015",
-        addressCountry: "IN",
-      },
-    }),
-  }}
-/>
     </SiteLayout>
   );
 }

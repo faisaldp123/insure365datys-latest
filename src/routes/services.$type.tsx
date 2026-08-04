@@ -291,7 +291,7 @@ function ServicePage() {
     <SiteLayout>
       {/* HERO SECTION */}
       <section
-        className="relative overflow-hidden py-28"
+        className="relative overflow-hidden py-18 md:py-22"
         style={{
           backgroundImage: `url(${s.image})`,
           backgroundSize: "cover",
@@ -343,7 +343,7 @@ function ServicePage() {
       </section>
 
       {/* BENEFITS */}
-      <section className="container mx-auto px-4 py-20">
+      <section className="container mx-auto px-4 py-14 md:py-16">
         <div className="text-center">
           <h2 className="text-3xl font-bold">
             What's Included
@@ -355,11 +355,11 @@ function ServicePage() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {s.benefits.map((b) => (
             <Card
               key={b}
-              className="rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              className="rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-primary" />
@@ -374,7 +374,7 @@ function ServicePage() {
       </section>
 
       {/* OVERVIEW */}
-<section className="bg-muted/30 py-20">
+<section className="bg-muted/30 py-14 md:py-16">
   <div className="container mx-auto max-w-6xl px-4">
     <h2 className="text-center text-3xl font-bold">
       About This Insurance
@@ -384,7 +384,7 @@ function ServicePage() {
       {s.overview}
     </p>
 
-    <div className="mt-12 overflow-hidden rounded-3xl shadow-xl">
+    <div className="mt-8 overflow-hidden rounded-3xl shadow-xl">
       <img
   src={s.infoImage}
   alt={`${s.title} Information`}
@@ -396,7 +396,7 @@ function ServicePage() {
 </section>
 
       {/* COVERAGE */}
-      <section className="container mx-auto max-w-6xl px-4 py-4">
+      <section className="container mx-auto max-w-6xl px-4 py-12 md:py-14">
         <div className="text-center">
           <h2 className="text-3xl font-bold">
             Coverage Includes
@@ -408,11 +408,11 @@ function ServicePage() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
           {s.coverage.map((item) => (
             <Card
               key={item}
-              className="rounded-2xl p-6 transition-all duration-300 hover:shadow-lg"
+              className="rounded-2xl p-5 transition-all duration-300 hover:shadow-lg"
             >
               <div className="flex items-center gap-3">
                 <CheckCircle2 className="h-5 w-5 text-primary" />
@@ -425,7 +425,7 @@ function ServicePage() {
       </section>
 
       {/* WHY CHOOSE */}
-      <section className="bg-muted/30 py-20">
+      <section className="bg-muted/30 py-14 md:py-16">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="text-center">
             <h2 className="text-3xl font-bold">
@@ -438,11 +438,11 @@ function ServicePage() {
             </p>
           </div>
 
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {s.whyChoose.map((item) => (
               <Card
                 key={item}
-                className="rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="rounded-2xl p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
                 <CheckCircle2 className="mx-auto mb-4 h-8 w-8 text-primary" />
 
@@ -456,9 +456,9 @@ function ServicePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24">
+      <section className="py-14 md:py-16">
         <div className="container mx-auto max-w-5xl px-4">
-          <Card className="rounded-[32px] bg-gradient-to-r from-primary to-blue-600 p-10 text-center text-white shadow-2xl">
+          <Card className="rounded-[32px] bg-gradient-to-r from-primary to-blue-600 p-7 text-center text-white shadow-2xl md:p-10">
             <h2 className="text-3xl font-bold md:text-4xl">
               Ready to Secure Your Future?
             </h2>

@@ -3,8 +3,16 @@ const BASE_URL = "https://insure365days-backend.onrender.com/api";
 export interface ContactPayload {
   name: string;
   mobile: string;
+  dob?: string;
+  alternativeMobile?: string;
   email?: string;
   insuranceType: string;
+  brandType?: string;
+  termAndPpt?: string;
+  applicationNumber?: string;
+  nomineeName?: string;
+  nomineeDob?: string;
+  shortAddress?: string;
   message?: string;
 }
 

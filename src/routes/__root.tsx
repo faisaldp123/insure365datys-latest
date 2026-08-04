@@ -86,7 +86,7 @@ export const Route = createRootRoute({
 
 {
   name: "twitter:image",
-  content: "https://insure365days.com/favicon.png",
+  content: "https://insure365days.com/fevicon.png",
 },
 
     {
@@ -121,7 +121,12 @@ export const Route = createRootRoute({
     {
   rel: "icon",
   type: "image/png",
-  href: "/favicon.png",
+  href: "/fevicon.png",
+},
+{
+  rel: "shortcut icon",
+  type: "image/png",
+  href: "/fevicon.png",
 }
   ],
 }),
@@ -145,8 +150,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
       name: "Insure365days",
       url: "https://insure365days.com",
 
-      logo: "https://insure365days.com/favicon.png",
-      image: "https://insure365days.com/favicon.png",
+      logo: "https://insure365days.com/fevicon.png",
+      image: "https://insure365days.com/fevicon.png",
 
       telephone: "+919870220211",
       email: "info@insure365days.com",
