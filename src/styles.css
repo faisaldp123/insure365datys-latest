@@ -157,11 +157,11 @@
 }
 @media (min-width: 768px) {
   .container {
-    padding-inline: 2rem;
+    padding-inline: 1.5rem;
   }
 }
 @media (min-width: 1024px) {
   .container {
-    padding-inline: 2.5rem;
+    padding-inline: 2rem;
   }
 }

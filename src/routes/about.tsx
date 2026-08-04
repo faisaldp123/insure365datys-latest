@@ -76,7 +76,7 @@ export const Route = createFileRoute("/about")({
 function About() {
   return (
     <SiteLayout>
-      <section className="bg-[var(--gradient-soft)] py-20">
+      <section className="bg-[var(--gradient-soft)] py-14 md:py-16">
         <div className="container mx-auto max-w-4xl px-4 text-center">
           <span className="inline-flex rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary">
             About Us
@@ -92,8 +92,8 @@ function About() {
         </div>
       </section>
 
-      <section className="container mx-auto grid gap-6 px-4 py-16 md:grid-cols-2">
-        <Card className="p-8">
+      <section className="container mx-auto grid gap-4 px-4 py-12 md:grid-cols-2">
+        <Card className="p-6">
           <Target className="h-10 w-10 text-primary" />
           <h2 className="mt-4 text-2xl font-bold">Our Mission</h2>
           <p className="mt-3 text-muted-foreground">
@@ -101,7 +101,7 @@ function About() {
             every customer to face tomorrow with confidence.
           </p>
         </Card>
-        <Card className="p-8">
+        <Card className="p-6">
           <Eye className="h-10 w-10 text-primary" />
           <h2 className="mt-4 text-2xl font-bold">Our Vision</h2>
           <p className="mt-3 text-muted-foreground">
@@ -111,13 +111,13 @@ function About() {
         </Card>
       </section>
 
-      <section className="bg-secondary/40 py-20">
+      <section className="bg-secondary/40 py-14 md:py-16">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold md:text-4xl">Why choose Insure365days</h2>
             <p className="mt-3 text-muted-foreground">A team that shows up for you, every single day.</p>
           </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
               { icon: Award, title: "10+ Years Experience", desc: "A decade of helping families navigate life's uncertainties." },
               { icon: Heart, title: "Customer First", desc: "Every plan is shaped around your real needs, not ours." },
@@ -133,7 +133,7 @@ function About() {
               </Card>
             ))}
           </div>
-          <div className="mt-12 text-center">
+          <div className="mt-8 text-center">
             <Button asChild size="lg" className="bg-gradient-to-r from-primary to-[var(--primary-glow)]">
               <Link to="/contact">Talk to an Advisor</Link>
             </Button>

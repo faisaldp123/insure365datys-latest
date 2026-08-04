@@ -31,7 +31,7 @@ Please contact me with more details.
     <>
       {/* Floating Chat Widget */}
       {!open && (
-        <div className="fixed bottom-24 sm:bottom-28 right-4 sm:right-6 z-[9999] flex flex-col items-end">
+        <div className="fixed bottom-22 right-4 z-[9999] flex flex-col items-end sm:bottom-26 sm:right-6">
           {/* Text Bubble */}
           <div className="bg-white shadow-xl border rounded-xl px-4 py-2 mb-3 text-sm font-medium text-gray-700">
             Need Help?
@@ -44,7 +44,8 @@ Please contact me with more details.
           {/* Chat Icon */}
           <button
             onClick={() => setOpen(true)}
-            className="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-xl hover:scale-110 transition-all duration-300"
+            aria-label="Open insurance advisor chat"
+            className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-xl ring-4 ring-background transition-all duration-300 hover:scale-110 hover:bg-primary/90"
           >
             <MessageCircle size={26} />
           </button>
