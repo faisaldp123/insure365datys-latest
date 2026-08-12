@@ -14,6 +14,7 @@ export interface ContactPayload {
   nomineeDob?: string;
   shortAddress?: string;
   message?: string;
+  remarks?: string;
 }
 
 export const postContact = async (data: ContactPayload) => {
