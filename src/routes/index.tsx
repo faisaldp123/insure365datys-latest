@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Shield, Car, HeartPulse, Users, CheckCircle2, Clock, HeadphonesIcon, BadgeDollarSign, Star, ClipboardList, FileCheck2, Handshake, ArrowRight } from "lucide-react";
+import { Shield, Car, HeartPulse, Users, CheckCircle2, Clock, HeadphonesIcon, BadgeDollarSign, Star, ClipboardList, FileCheck2, Handshake } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -47,8 +47,6 @@ const process = [
   { icon: Handshake, title: "Get expert guidance", desc: "An advisor helps compare suitable plan options." },
   { icon: FileCheck2, title: "Apply with confidence", desc: "Complete your application with clear support at every step." },
 ];
-
-const partners = ["Star Union", "Bharti AXA", "Pramerica Life", "Shri Ram", "Go Digit", "Ageas Federal", "HDFC Life", "ICICI Life"];
 
 const faqs = [
   { q: "How quickly can I get a quote?", a: "Most quotes are generated in under 2 minutes through our online form or a quick call." },
@@ -162,19 +160,6 @@ function Index() {
                 <p className="mt-2 text-sm text-muted-foreground">{r.desc}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Partners */}
-      <section className="bg-secondary/40 py-14 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col gap-3 text-center sm:flex-row sm:items-end sm:justify-between sm:text-left">
-            <div><span className="text-sm font-semibold text-primary">BRAND OPTIONS</span><h2 className="mt-2 text-3xl font-bold">Plans from leading insurers</h2></div>
-            <Link to="/contact" className="inline-flex items-center justify-center gap-1 text-sm font-semibold text-primary hover:underline">Explore your options <ArrowRight className="h-4 w-4" /></Link>
-          </div>
-          <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {partners.map((partner) => <div key={partner} className="rounded-xl border border-border bg-background px-4 py-4 text-center text-sm font-semibold text-foreground/75 shadow-sm">{partner}</div>)}
           </div>
         </div>
       </section>

@@ -32,9 +32,10 @@ const schema = z.object({
   nomineeName: z.string().trim().min(2, "Enter nominee name").max(80),
   nomineeDob: z.string().min(1, "Select nominee date of birth"),
   shortAddress: z.string().trim().min(5, "Enter a short address").max(300),
+  remarks: z.string().trim().max(1000, "Remarks must be 1000 characters or less"),
 });
 
-const initialForm = { name: "", dob: "", mobile: "", alternativeMobile: "", insuranceType: "", brandType: "", termAndPpt: "", applicationNumber: "", email: "", nomineeName: "", nomineeDob: "", shortAddress: "" };
+const initialForm = { name: "", dob: "", mobile: "", alternativeMobile: "", insuranceType: "", brandType: "", termAndPpt: "", applicationNumber: "", email: "", nomineeName: "", nomineeDob: "", shortAddress: "", remarks: "" };
 
 function Contact() {
   const [form, setForm] = useState(initialForm);
@@ -104,12 +105,13 @@ function Contact() {
             {field("email", "Email address", "email", "name@example.com")}
             {field("nomineeName", "Nominee name", "text", "Enter nominee name")}
             {field("nomineeDob", "Nominee date of birth", "date")}
+            {field("remarks", "Remarks", "text", "Add remarks")}
             <div className="space-y-1.5 sm:col-span-2">
               <Label htmlFor="shortAddress">Short address</Label>
               <Textarea id="shortAddress" rows={3} value={form.shortAddress} placeholder="House / street, city, state" onChange={(e) => update("shortAddress", e.target.value)} />
               {errors.shortAddress && <p className="text-xs text-destructive">{errors.shortAddress}</p>}
             </div>
-            <div className="pt-1 sm:col-span-2"><Button type="submit" size="lg" className="w-full sm:w-auto">Submit application details</Button></div>
+            <div className="pt-1 sm:col-span-2"><Button type="submit" size="lg" className="w-full cursor-pointer sm:w-auto">Submit application details</Button></div>
           </form>
         </Card>
         <div className="space-y-4">

@@ -121,12 +121,13 @@ export const Route = createRootRoute({
     {
   rel: "icon",
   type: "image/png",
-  href: "/fevicon.png",
+  sizes: "48x48",
+  href: "/favicon.png",
 },
 {
   rel: "shortcut icon",
   type: "image/png",
-  href: "/fevicon.png",
+  href: "/favicon.png",
 }
   ],
 }),
