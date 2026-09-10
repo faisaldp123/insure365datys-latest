@@ -13,8 +13,8 @@ import { postContact, checkApplicationNumber } from "@/lib/api";
 
 const insuranceTypes = ["Health Insurance", "Life Insurance", "Car Insurance"];
 const brands = ["Star Union", "Bharti AXA", "Pramerica Life", "Shri Ram", "Go Digit", "Ageas Federal", "Central General", "HDFC Life", "IndusInd Nippon", "ICICI Life"];
-const initialForm = { name: "", dob: "", mobile: "", alternativeMobile: "", insuranceType: "", brandType: "", termAndPpt: "", applicationNumber: "", email: "", nomineeName: "", nomineeDob: "", shortAddress: "", remarks: "" };
-const schema = z.object({ name: z.string().trim().min(2, "Enter your name"), dob: z.string().min(1, "Select date of birth"), mobile: z.string().trim().min(8, "Enter a valid mobile number"), alternativeMobile: z.string(), insuranceType: z.string().min(1, "Select insurance type"), brandType: z.string().min(1, "Select brand"), termAndPpt: z.string().trim().min(1, "Enter term and PPT"), applicationNumber: z.string().trim().min(1, "Enter application number"), email: z.string().trim().email("Enter a valid email"), nomineeName: z.string().trim().min(2, "Enter nominee name"), nomineeDob: z.string().min(1, "Select nominee date of birth"), shortAddress: z.string().trim().min(5, "Enter a short address"), remarks: z.string().trim().max(1000, "Remarks must be 1000 characters or less") });
+const initialForm = { name: "", dob: "", mobile: "", alternativeMobile: "", insuranceType: "", brandType: "", termAndPpt: "", applicationNumber: "", premiumAmount: "", email: "", nomineeName: "", nomineeDob: "", shortAddress: "", remarks: "" };
+const schema = z.object({ name: z.string().trim().min(2, "Enter your name"), dob: z.string().min(1, "Select date of birth"), mobile: z.string().trim().min(8, "Enter a valid mobile number"), alternativeMobile: z.string(), insuranceType: z.string().min(1, "Select insurance type"), brandType: z.string().min(1, "Select brand"), termAndPpt: z.string().trim().min(1, "Enter term and PPT"), applicationNumber: z.string().trim().min(1, "Enter application number"), premiumAmount: z.string().trim().min(1, "Enter premium amount").refine((val) => !isNaN(Number(val)) && Number(val) > 0, "Enter a valid premium amount"), email: z.string().trim().email("Enter a valid email"), nomineeName: z.string().trim().min(2, "Enter nominee name"), nomineeDob: z.string().min(1, "Select nominee date of birth"), shortAddress: z.string().trim().min(5, "Enter a short address"), remarks: z.string().trim().max(1000, "Remarks must be 1000 characters or less") });
 const STORAGE_KEY = "insure365_popup_seen";
 const DUPLICATE_APPLICATION_ERROR = "This application number has already been submitted.";
 
@@ -89,7 +89,7 @@ export function ConsultationModal() {
 
     setIsSubmitting(true);
     try {
-      await postContact(form);
+      await postContact({ ...form, premiumAmount: Number(form.premiumAmount) });
       setErrors({});
       setForm(initialForm);
       setIsDuplicateAppNumber(false);
@@ -171,6 +171,7 @@ export function ConsultationModal() {
                 {isCheckingAppNumber && !errors.applicationNumber && <p className="text-xs text-muted-foreground">Checking application number…</p>}
                 {errors.applicationNumber && <p className="text-xs text-destructive">{errors.applicationNumber}</p>}
               </div>
+              {field("premiumAmount", "Premium amount", "number")}
               {field("email", "Email address", "email")}
               {field("nomineeName", "Nominee name")}
               {field("nomineeDob", "Nominee date of birth", "date")}

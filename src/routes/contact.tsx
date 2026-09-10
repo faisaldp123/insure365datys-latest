@@ -31,6 +31,7 @@ const schema = z.object({
   brandType: z.string().min(1, "Select brand type"),
   termAndPpt: z.string().trim().min(1, "Enter term and PPT").max(80),
   applicationNumber: z.string().trim().min(1, "Enter application number").max(80),
+  premiumAmount: z.string().trim().min(1, "Enter premium amount").refine((val) => !isNaN(Number(val)) && Number(val) > 0, "Enter a valid premium amount"),
   email: z.string().trim().email("Enter a valid email").max(120),
   nomineeName: z.string().trim().min(2, "Enter nominee name").max(80),
   nomineeDob: z.string().min(1, "Select nominee date of birth"),
@@ -38,7 +39,7 @@ const schema = z.object({
   remarks: z.string().trim().max(1000, "Remarks must be 1000 characters or less"),
 });
 
-const initialForm = { name: "", dob: "", mobile: "", alternativeMobile: "", insuranceType: "", brandType: "", termAndPpt: "", applicationNumber: "", email: "", nomineeName: "", nomineeDob: "", shortAddress: "", remarks: "" };
+const initialForm = { name: "", dob: "", mobile: "", alternativeMobile: "", insuranceType: "", brandType: "", termAndPpt: "", applicationNumber: "", premiumAmount: "", email: "", nomineeName: "", nomineeDob: "", shortAddress: "", remarks: "" };
 
 const DUPLICATE_APPLICATION_ERROR = "This application number has already been submitted.";
 
@@ -103,7 +104,7 @@ function Contact() {
 
     setIsSubmitting(true);
     try {
-      await postContact(form);
+      await postContact({ ...form, premiumAmount: Number(form.premiumAmount) });
       setErrors({});
       setForm(initialForm);
       setIsDuplicateAppNumber(false);
@@ -172,6 +173,7 @@ function Contact() {
               {isCheckingAppNumber && !errors.applicationNumber && <p className="text-xs text-muted-foreground">Checking application number…</p>}
               {errors.applicationNumber && <p className="text-xs text-destructive">{errors.applicationNumber}</p>}
             </div>
+            {field("premiumAmount", "Premium amount", "number", "e.g. 25000")}
             {field("email", "Email address", "email", "name@example.com")}
             {field("nomineeName", "Nominee name", "text", "Enter nominee name")}
             {field("nomineeDob", "Nominee date of birth", "date")}
