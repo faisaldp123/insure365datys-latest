@@ -10,6 +10,7 @@ export interface ContactPayload {
   brandType?: string;
   termAndPpt?: string;
   applicationNumber?: string;
+  premiumAmount?: number;
   nomineeName?: string;
   nomineeDob?: string;
   shortAddress?: string;
